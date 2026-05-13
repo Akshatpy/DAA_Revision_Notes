@@ -740,12 +740,13 @@ Check same column and same diagonal before recursing.`,
 const quickRef = [
   {
     title: 'Complexity Snapshot',
+    columns: ['Algorithm', 'Best', 'Average', 'Worst', 'Space', 'Stable', 'In-place'],
     rows: [
-      ['Selection Sort', 'Theta(n^2)', 'Theta(n^2)', 'Theta(n^2)', 'O(1)', 'No', 'Yes'],
-      ['Insertion Sort', 'Theta(n)', 'Theta(n^2)', 'Theta(n^2)', 'O(1)', 'Yes', 'Yes'],
-      ['Merge Sort', 'Theta(n log n)', 'Theta(n log n)', 'Theta(n log n)', 'O(n)', 'Yes', 'No'],
-      ['Quick Sort', 'Theta(n log n)', 'Theta(n log n)', 'Theta(n^2)', 'O(log n)', 'No', 'Yes'],
-      ['Heap Sort', 'Theta(n log n)', 'Theta(n log n)', 'Theta(n log n)', 'O(1)', 'No', 'Yes'],
+      ['Selection Sort', 'Θ(n^2)', 'Θ(n^2)', 'Θ(n^2)', 'O(1)', 'No', 'Yes'],
+      ['Insertion Sort', 'Θ(n)', 'Θ(n^2)', 'Θ(n^2)', 'O(1)', 'Yes', 'Yes'],
+      ['Merge Sort', 'Θ(n log n)', 'Θ(n log n)', 'Θ(n log n)', 'O(n)', 'Yes', 'No'],
+      ['Quick Sort', 'Θ(n log n)', 'Θ(n log n)', 'Θ(n^2)', 'O(log n)', 'No', 'Yes'],
+      ['Heap Sort', 'Θ(n log n)', 'Θ(n log n)', 'Θ(n log n)', 'O(1)', 'No', 'Yes'],
       ['Dijkstra (array)', '-', '-', 'O(V^2)', 'O(V)', '-', '-'],
       ['Dijkstra (heap)', '-', '-', 'O(E log V)', 'O(V)', '-', '-'],
       ['Prim', '-', '-', 'O(V^2)', 'O(V)', '-', '-'],
@@ -755,6 +756,7 @@ const quickRef = [
   },
   {
     title: 'Must Remember Formulas',
+    columns: ['Topic', 'Formula'],
     rows: [
       ['Master theorem', 'T(n) = aT(n/b) + f(n)'],
       ['Binary tree nodes', 'external = internal + 1'],
@@ -763,6 +765,22 @@ const quickRef = [
       ['Binary search worst case', 'ceil(log2(n + 1))'],
       ['Strassen', '7T(n/2) + Theta(n^2) => Theta(n^2.807)'],
       ['Huffman', 'left edge = 0, right edge = 1']
+    ]
+  },
+  {
+    title: 'Recurrence Relations',
+    columns: ['Algorithm', 'Recurrence', 'Base / Notes', 'Result'],
+    rows: [
+      ['Tower of Hanoi', 'M(n) = 2M(n-1) + 1', 'M(1) = 1', 'M(n) = 2^n - 1'],
+      ['Selection Sort', 'T(n) = T(n-1) + Theta(n)', 'T(1) = Theta(1)', 'Theta(n^2)'],
+      ['Bubble Sort', 'T(n) = T(n-1) + Theta(n)', 'T(1) = Theta(1)', 'Theta(n^2)'],
+      ['Insertion Sort', 'T(n) = T(n-1) + Theta(n)', 'T(1) = Theta(1)', 'Theta(n^2)'],
+      ['Binary Search', 'T(n) = T(n/2) + Theta(1)', 'T(1) = Theta(1)', 'Theta(log n)'],
+      ['Merge Sort', 'T(n) = 2T(n/2) + Theta(n)', 'T(1) = Theta(1)', 'Theta(n log n)'],
+      ['Quick Sort', 'T(n) = T(k) + T(n-k-1) + Theta(n)', 'Worst case: T(n) = T(n-1) + Theta(n)', 'Avg Theta(n log n), worst Theta(n^2)'],
+      ['Heap Sort', 'T(n) = T(n-1) + Theta(log n)', 'Build-heap is Theta(n)', 'Theta(n log n)'],
+      ['Strassen', 'T(n) = 7T(n/2) + Theta(n^2)', 'T(1) = Theta(1)', 'Theta(n^2.807)'],
+      ['Karatsuba', 'T(n) = 3T(n/2) + Theta(n)', 'T(1) = Theta(1)', 'Theta(n^log2 3)']
     ]
   }
 ];
@@ -1042,9 +1060,7 @@ function renderQuickRef() {
     const tableEl = document.createElement('table');
     const thead = document.createElement('thead');
     const hr = document.createElement('tr');
-    const headers = table.rows[0].length === 7
-      ? ['Algorithm', 'Best', 'Average', 'Worst', 'Space', 'Stable', 'In-place']
-      : ['Topic', 'Formula'];
+    const headers = table.columns || table.rows[0].map((_, index) => `Col ${index + 1}`);
     headers.forEach((headerText) => {
       const th = document.createElement('th');
       th.textContent = headerText;
