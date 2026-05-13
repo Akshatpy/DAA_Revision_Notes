@@ -7,9 +7,9 @@
   --muted: #a5b5cc;
   --line: #213248;
   --shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
-  --accent: #5eead4;
-  --accent-2: #f59e0b;
-  --accent-3: #a78bfa;
+  --accent: #67e8f9;
+  --accent-2: #fbbf24;
+  --accent-3: #c084fc;
   --good: #4ade80;
   --warn: #fb7185;
   --code-bg: #020617;
@@ -90,6 +90,14 @@ body {
   border: 1px solid rgba(33, 50, 72, 0.95);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
+}
+
+.hero-copy,
+.hero-card,
+.sidebar-block,
+.quick-card,
+.notice {
+  background: linear-gradient(180deg, rgba(14, 24, 39, 0.96), rgba(9, 15, 27, 0.92));
 }
 
 .hero-copy,
@@ -338,19 +346,46 @@ summary:focus-visible {
 .unit-header {
   padding: 1rem 1.1rem;
   border-radius: 18px;
-  background: rgba(3, 8, 20, 0.96);
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(6, 11, 24, 0.96) 58%, rgba(8, 18, 32, 0.98));
+  border: 1px solid rgba(103, 232, 249, 0.16);
   color: white;
   box-shadow: var(--shadow);
+}
+
+.unit-header::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+
+.unit-header::after {
+  content: '';
+  position: absolute;
+  inset: -20% -5% auto auto;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(103, 232, 249, 0.14), transparent 70%);
+  pointer-events: none;
 }
 
 .unit-header h2 {
   margin: 0;
   font-size: 1.25rem;
+  position: relative;
+  z-index: 1;
 }
 
 .unit-header p {
   margin: 0.35rem 0 0;
   color: rgba(255, 255, 255, 0.82);
+  position: relative;
+  z-index: 1;
 }
 
 .cards {
