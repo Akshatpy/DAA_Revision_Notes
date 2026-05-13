@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>DAA Revision Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="backdrop backdrop-a"></div>
+  <div class="backdrop backdrop-b"></div>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Design and Analysis of Algorithms</p>
+      <h1>ESA Revision 😭</h1>
+      <p class="lede">
+        An interactive cheat sheet built from your notes and syllabus. Search topics, jump by unit,
+        expand only what you need, and keep the pseudocode readable.
+      </p>
+      <div class="hero-meta" id="stats"></div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">How to use this</div>
+      <ol>
+        <li>Use search to jump directly to an algorithm or theory topic.</li>
+        <li>Filter by unit if you want to revise one chapter at a time.</li>
+        <li>Open a card for steps, pseudocode, examples, and exam facts.</li>
+      </ol>
+      <div class="hero-actions">
+        <button id="expandAll" class="primary">Expand all</button>
+        <button id="collapseAll" class="secondary">Collapse all</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="toolbar">
+    <div class="search-wrap">
+      <label for="search">Search</label>
+      <input id="search" type="search" placeholder="Try: Prim, knapsack, master theorem, Horspool..." />
+    </div>
+    <div class="filter-wrap">
+      <div class="label-row">
+        <span>Unit filter</span>
+        <button id="clearFilter" class="link-button" type="button">Clear</button>
+      </div>
+      <div id="unitFilters" class="chips"></div>
+    </div>
+  </section>
+
+  <main class="shell">
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <h2>Jump to unit</h2>
+        <nav id="toc" class="toc"></nav>
+      </div>
+      <div class="sidebar-block note-box">
+        <h2>Exam focus</h2>
+        <ul>
+          <li>Pseudocode clarity matters more than syntax.</li>
+          <li>Practice the example tables for MST, DP, and string matching.</li>
+          <li>Remember the complexity and the key property for each algorithm.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <section id="content" class="content"></section>
+  </main>
+
+  <section class="quick-ref" id="quickRef"></section>
+
+  <script src="app.js"></script>
+</body>
+</html>
