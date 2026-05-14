@@ -1157,3 +1157,14 @@ renderFilters();
 renderContent();
 renderQuickRef();
 applyFilters();
+
+// Show motivation popup once after page load
+window.setTimeout(() => {
+  const popup = document.getElementById('motivationPopup');
+  if (popup) {
+    popup.classList.add('show');
+    window.setTimeout(() => {
+      popup.classList.remove('show');
+    }, 5000);
+  }
+}, 2500);
