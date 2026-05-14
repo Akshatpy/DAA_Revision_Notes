@@ -1158,6 +1158,38 @@ renderContent();
 renderQuickRef();
 applyFilters();
 
+// Auto-reload on version change
+(function checkVersion() {
+  const currentVersion = localStorage.getItem('appVersion');
+  fetch('/version.txt?t=' + Date.now())
+    .then(r => r.text())
+    .then(newVersion => {
+      newVersion = newVersion.trim();
+      if (currentVersion && newVersion !== currentVersion) {
+        localStorage.setItem('appVersion', newVersion);
+        window.location.reload();
+      } else if (!currentVersion) {
+        localStorage.setItem('appVersion', newVersion);
+      }
+    })
+    .catch(() => {});
+  
+  // Check every 30 seconds
+  setInterval(() => {
+    fetch('/version.txt?t=' + Date.now())
+      .then(r => r.text())
+      .then(newVersion => {
+        newVersion = newVersion.trim();
+        const stored = localStorage.getItem('appVersion');
+        if (stored && newVersion !== stored) {
+          localStorage.setItem('appVersion', newVersion);
+          window.location.reload();
+        }
+      })
+      .catch(() => {});
+  }, 30000);
+})();
+
 // Show motivation popup once after page load
 window.setTimeout(() => {
   const popup = document.getElementById('motivationPopup');
